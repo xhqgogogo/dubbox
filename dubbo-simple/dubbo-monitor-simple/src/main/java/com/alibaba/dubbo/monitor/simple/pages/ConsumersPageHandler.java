@@ -43,7 +43,7 @@ public class ConsumersPageHandler implements PageHandler {
                     List<String> row = new ArrayList<String>();
                     String s = u.toFullString();
                     row.add(s.replace("&", "&amp;"));
-                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?service=" + service + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
+//                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?service=" + service + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
                     rows.add(row);
                 }
             }
@@ -52,7 +52,7 @@ public class ConsumersPageHandler implements PageHandler {
                     + "\">Providers</a> | Consumers | <a href=\"statistics.html?service=" + service 
                     + "\">Statistics</a> | <a href=\"charts.html?service=" + service 
                     + "\">Charts</a>", "Consumers (" + rows.size() + ")",
-                    new String[] { "Consumer URL:", "Unsubscribe" }, rows);
+                    new String[] { "Consumer URL:" }, rows);
         } else if (host != null && host.length() > 0) {
             List<List<String>> rows = new ArrayList<List<String>>();
             List<URL> consumers = RegistryContainer.getInstance().getConsumersByHost(host);
@@ -61,12 +61,12 @@ public class ConsumersPageHandler implements PageHandler {
                     List<String> row = new ArrayList<String>();
                     String s = u.toFullString();
                     row.add(s.replace("&", "&amp;"));
-                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?host=" + host + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
+//                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?host=" + host + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
                     rows.add(row);
                 }
             }
             return new Page("<a href=\"hosts.html\">Hosts</a> &gt; " + NetUtils.getHostName(host) + "/" + host + " &gt; <a href=\"providers.html?host=" + host + "\">Providers</a> | Consumers", "Consumers (" + rows.size() + ")",
-                    new String[] { "Consumer URL:", "Unsubscribe" }, rows);
+                    new String[] { "Consumer URL:" }, rows);
         } else if (application != null && application.length() > 0) {
             List<List<String>> rows = new ArrayList<List<String>>();
             List<URL> consumers = RegistryContainer.getInstance().getConsumersByApplication(application);
@@ -75,12 +75,12 @@ public class ConsumersPageHandler implements PageHandler {
                     List<String> row = new ArrayList<String>();
                     String s = u.toFullString();
                     row.add(s.replace("&", "&amp;"));
-                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?application=" + application + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
+//                    row.add("<button onclick=\"if(confirm('Confirm unsubscribe consumer?')){window.location.href='unsubscribe.html?application=" + application + "&consumer=" + URL.encode(s) + "';}\">Unsubscribe</button>");
                     rows.add(row);
                 }
             }
             return new Page("<a href=\"applications.html\">Applications</a> &gt; " + application + " &gt; <a href=\"providers.html?application=" + application + "\">Providers</a> | Consumers | <a href=\"dependencies.html?application=" + application + "\">Depends On</a> | <a href=\"dependencies.html?application=" + application + "&reverse=true\">Used By</a>", "Consumers (" + rows.size() + ")",
-                    new String[] { "Consumer URL:", "Unsubscribe" }, rows);
+                    new String[] { "Consumer URL:" }, rows);
         } else {
             throw new IllegalArgumentException("Please input service or host or application parameter.");
         }
