@@ -39,6 +39,8 @@ public class JettyContainer implements Container {
 
     private static final Logger logger = LoggerFactory.getLogger(JettyContainer.class);
 
+    public static final String JETTY_HOST = "dubbo.jetty.host";
+
     public static final String JETTY_PORT = "dubbo.jetty.port";
 
     public static final String JETTY_DIRECTORY = "dubbo.jetty.directory";
@@ -59,6 +61,10 @@ public class JettyContainer implements Container {
         }
         connector = new SelectChannelConnector();
         connector.setPort(port);
+        String host = ConfigUtils.getProperty(JETTY_HOST);
+        if ( host != null && !host.trim().isEmpty()){
+            connector.setHost(host);
+        }
         ServletHandler handler = new ServletHandler();
         
         String resources = ConfigUtils.getProperty(JETTY_DIRECTORY);
