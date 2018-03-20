@@ -135,7 +135,13 @@ public class DubboMonitor implements Monitor {
             } while (! reference.compareAndSet(current, update));
         }
     }
-    
+
+    /**
+     * xhq 这是消费者调用提供者时都进入这个统计收集，每次调用都会执行，数据收集到statisticsMap 里去，然后定时通过上面send方法读取statisticsMap里的数据发出去
+     * 这里收集到的信息如：
+     * count://114.55.66.132:20900/com.qlchat.share.personshare.PersonPartyShareRpcService/getUserRef?application=qlchat-share-provider-demo&concurrent=1&consumer=10.80.109.201&elapsed=2&input=1071&interface=com.qlchat.share.personshare.PersonPartyShareRpcService&method=getUserRef&output=&success=1
+     * @param url
+     */
     public void collect(URL url) {
         // 读写统计变量
         int success = url.getParameter(MonitorService.SUCCESS, 0);

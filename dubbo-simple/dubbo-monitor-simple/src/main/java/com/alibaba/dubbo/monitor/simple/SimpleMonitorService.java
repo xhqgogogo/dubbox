@@ -420,6 +420,12 @@ public class SimpleMonitorService implements MonitorService {
         collect(statistics);
     }
 
+    /**
+     * xhq 这个方法主要时dubbo-monitor监控用于接受服务／消费者定时send 上来的数据；这个方法跟 com.alibaba.dubbo.monitor.dubbo.DubboMonitor.send() 方法对应
+     * 数据格式如：
+     * count://114.55.66.132:20900/com.qlchat.share.personshare.PersonPartyBusinessTagRpcService/simpleList?application=qlchat-share-provider-demo&concurrent=0&consumer=10.81.65.159&elapsed=0&failure=0&input=0&interface=com.qlchat.share.personshare.PersonPartyBusinessTagRpcService&max.concurrent=0&max.elapsed=0&max.input=0&max.output=0&method=simpleList&output=0&success=0&timestamp=1521552918823
+     * @param statistics
+     */
     public void collect(URL statistics) {
         queue.offer(statistics);
         if (logger.isInfoEnabled()) {
